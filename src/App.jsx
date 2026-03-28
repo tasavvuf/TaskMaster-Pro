@@ -13,7 +13,10 @@ function App() {
         ? { ...t, isDone: !t.isDone }
         : t
     )
-  );
+  ); 
+  };
+const remove = (id) => {
+  settask((prev) => prev.filter((t) => t.id !== id));
 };
   return (
     <div className="min-h-screen bg-black text-white p-6">
@@ -22,7 +25,7 @@ function App() {
       </h1>
       <AddTaskForm addTask={addTask}/>
       <br />
-      <TaskList task={task} toggleTask={altertask}/>
+      <TaskList task={task} toggleTask={altertask} remove = {remove} />
       
     </div>
   );

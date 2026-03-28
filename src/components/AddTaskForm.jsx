@@ -64,17 +64,22 @@ function AddTaskForm({addTask}) {
         <br />
      
       
-       <button
-         disabled={isDesable}
- 
-       onClick={(e)=>{e.preventDefault()
-        handleSub();
-      }} className={`px-3 py-1 text-yellow-300 
-        ${isDesable ? "bg-red-900 cursor-not-allowed"
-          : "bg-black rounded cursor-pointer"
-        }
-       `} > add task</button>
-     
+   <button
+  disabled={isDesable}
+  onClick={(e) => {
+    e.preventDefault();
+    handleSub();
+  }}
+  className={`px-4 py-2 rounded-xl font-bold transition-all duration-300 border text-sm uppercase tracking-wider
+    ${isDesable 
+      ? "bg-red-500/10 text-red-500 border-red-500/20 cursor-not-allowed opacity-60" 
+      : "bg-amber-500/10 text-amber-300 border-amber-500/30 hover:bg-amber-500 hover:text-[#1b1b1d] hover:shadow-[0_0_15px_rgba(245,158,11,0.3)] cursor-pointer active:scale-95"
+    }
+  `}
+>
+  Add Task
+</button>
+
       </form>
     </div>
   );
