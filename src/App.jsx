@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import AddTaskForm from "./components/AddTaskForm";
 import TaskList from "./components/TaskList";
 import Form from "./components/Form";
+import Stats from './components/Stats'
 function App() {
   const [showForm, setShowForm] = useState(false);
   const [task, settask] = useState([]);
@@ -51,10 +52,13 @@ function App() {
 
   return (
     <div className="min-h-screen bg-black text-white p-6">
-      <h1 className="text-amber-300 text-3xl font-bold select-none ">
+      <h1 className="text-amber-300 text-3xl font-bold select-none w-full ">
         Task Maker Pro
       </h1>
-      <AddTaskForm addTask={addTask} />
+      <div className="flex h=full gap-3 mt-5 rounded p-3 ">
+        <AddTaskForm addTask={addTask} />
+        <Stats  task={task}  />
+      </div>
       <br />
       {showForm ? (
         <Form

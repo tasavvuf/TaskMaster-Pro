@@ -25,10 +25,10 @@ function AddTaskForm({addTask}) {
 
   
   return (
-    <div className="h-full w-full bg-[#1b1b1d] mt-5 rounded p-3">
+    <div className="h-full w-[70%] bg-[#1b1b1d] rounded p-3 ">
       <h2> add your tasks here </h2>
       <form action="">
-       Title :  <input type="text" value={tittle}   name="tiltle" onChange={(value)=>{
+       Title :  <input type="text" value={tittle}    name="tiltle" onChange={(value)=>{
         setTittle(value.target.value)
         
     
