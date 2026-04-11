@@ -10,6 +10,8 @@ const filters = [
   "Personal",
 ];
 function TaskList({ task, toggleTask, remove , toggleedit }) {
+  const [temp, settemp] = useState("") 
+
   const [activeFilter, setActiveFilter] = useState("All");
 
   const base =
@@ -22,20 +24,33 @@ function TaskList({ task, toggleTask, remove , toggleedit }) {
     "bg-amber-500/10 text-amber-300 border-amber-500/30 hover:bg-amber-500 hover:text-[#1b1b1d] hover:shadow-[0_0_15px_rgba(245,158,11,0.3)]";
 
   const filteredTasks = (() => {
+    let basetask ;
     switch (activeFilter) {
       case "Active":
-        return task.filter((t) => !t.isDone);
+        basetask =  task.filter((t) => !t.isDone);
+        break
       case "Completed":
-        return task.filter((t) => t.isDone);
+        basetask =  task.filter((t) => t.isDone);
+        break
       case "High Priority":
-        return task.filter((t) => t.priority === "High");
+        basetask =   task.filter((t) => t.priority === "High");
+        break
       case "Work":
-        return task.filter((t) => t.cata === "Work");
+        basetask =   task.filter((t) => t.cata === "Work");
+        break
       case "Personal":
-        return task.filter((t) => t.cata === "Personal");
+        basetask =   task.filter((t) => t.cata === "Personal");
+        break
       default:
-        return task;
+        basetask =   task;
+        break  
     }
+     if(temp==""){
+          return basetask
+        }
+       return basetask.filter((t)=>{
+          return t.tittle.toLowerCase().includes(temp.toLocaleLowerCase())
+        })
   })()
   const getCount = (filter) => {
   switch (filter) {
@@ -55,7 +70,11 @@ function TaskList({ task, toggleTask, remove , toggleedit }) {
 };
   return (
     <div className="p-2">
-      <h2 className="text-2xl">Your Tasks</h2>
+     <div className="flex gap-8">
+       <h2 className="text-2xl">Your Tasks</h2>
+       <input className=" px-2 text-zinc-200 active:border-0 bg-[#3c3c3c] rounded " type="text" placeholder="search here " onChange={(val)=>settemp(val.target.value)}  />
+    
+      </div>
 
       <div className="flex gap-2 my-4">
         {filters.map((filter) => (
