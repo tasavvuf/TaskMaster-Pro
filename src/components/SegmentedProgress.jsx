@@ -11,7 +11,7 @@ function SegmentedProgress({ completed, total }) {
           className={`h-2 flex-1 rounded transition-all duration-300 ${
             i < completed
               ? "bg-indigo-500"
-              : "bg-zinc-800"
+              : "bg-zinc-700"
           }`}
         />
       ))}
