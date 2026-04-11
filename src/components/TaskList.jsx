@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import TaskItem from "./TaskItem";
+import { Search } from 'lucide-react';
 
 const filters = [
   "All",
@@ -72,7 +73,10 @@ function TaskList({ task, toggleTask, remove , toggleedit }) {
     <div className="p-2">
      <div className="flex gap-8">
        <h2 className="text-2xl">Your Tasks</h2>
-       <input className=" px-2 text-zinc-200 active:border-0 bg-[#3c3c3c] rounded " type="text" placeholder="search here " onChange={(val)=>settemp(val.target.value)}  />
+       <div className="flex bg-[#3c3c3c]  p-2 rounded-full">
+<Search color="#bcaeae" />      <input className=" px-2 text-zinc-200 active:border-0 bg-transparent rounded " type="text" placeholder="search here " onChange={(val)=>settemp(val.target.value)}  />
+       </div>
+     
     
       </div>
 

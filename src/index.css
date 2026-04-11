@@ -3,3 +3,17 @@ select option {
   background-color: #1e1e1e;
   color: white;
 }
+/* SAFE RESET */
+input,
+textarea,
+select {
+  outline: none;
+}
+
+/* remove browser focus ring only */
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  box-shadow: none;
+}
