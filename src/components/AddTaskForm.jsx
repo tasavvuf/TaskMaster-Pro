@@ -13,7 +13,6 @@ function AddTaskForm({addTask}) {
       des : des,
       priority : Priority,
       cata : cata,
-      id: Date.now(),
       isDone : false
     }
   addTask(details)

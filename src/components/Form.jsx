@@ -14,7 +14,7 @@ function Form({ task,editTask , toggleedit }) {
       cata : cata,
       
     }
-    editTask(task.id,details)
+    editTask(task._id,details)
      toggleedit()
         }
   return (

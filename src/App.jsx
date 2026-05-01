@@ -3,52 +3,90 @@ import AddTaskForm from "./components/AddTaskForm";
 import TaskList from "./components/TaskList";
 import Form from "./components/Form";
 import Stats from './components/Stats'
+import axios from "axios";
 function App() {
   const [showForm, setShowForm] = useState(false);
   const [task, settask] = useState([]);
   const [editTaskData, setEditTaskData] = useState(null);
-    useEffect(() => {
-    // Load tasks from localStorage on mount
-    const savedTasks = localStorage.getItem("tasks");
-    if (savedTasks) {
-      settask(JSON.parse(savedTasks));
-    }
-  }, []);
   useEffect(() => {
-    // Save tasks to localStorage whenever tasks change
-    localStorage.setItem("tasks", JSON.stringify(task));
-  }, [task]);
-  const addTask = (task) => {
-    settask((prev) => [...prev, task]);
-  };
+    const fetchTasks = async () => {
+      try {
+        const res = await fetch("http://localhost:5000/tasks")
+        const data = await res.json()
+
+        settask(data.tasks ?? [])
+      } catch (error) {
+        console.error("Error loading tasks:", error.message)
+      }
+    }
+
+    fetchTasks()
+  }, [])
+  const addTask = async (task) => {
+    try {
+      const { data } = await axios.post("http://localhost:5000/task", task)
+
+      settask((prev) => [...prev, data.task])
+    } catch (err) {
+      console.error("Error adding task:", err.message)
+    }
+  }
   const toggleedit = (taskie) => {
     setEditTaskData(taskie);
     setShowForm(true);
   };
-  const altertask = (id) => {
-    settask((prev) =>
-      prev.map((t) => (t.id === id ? { ...t, isDone: !t.isDone } : t)),
-    );
-  };
-  const editTask = (id, values) => {
-    settask((prev) =>
-      prev.map((t) =>
-        t.id === id
-          ? {
-              ...t,
-              tittle: values.tittle,
-              des: values.des,
-              priority: values.priority,
-              cata: values.cata,
-            }
-          : t,
-      ),
-    );
-  };
-  const remove = (id) => {
-    settask((prev) => prev.filter((t) => t.id !== id));
-  };
 
+
+  const altertask = async (id) => {
+    try {
+      const currentTask = task.find((t) => t._id === id)
+
+      if (!currentTask) return
+
+      const { data } = await axios.put(
+        `http://localhost:5000/task/${id}`,
+        { isDone: !currentTask.isDone }
+      )
+
+      settask((prev) =>
+        prev.map((t) =>
+          t._id === id ? data.updatedTask : t
+        )
+      )
+    } catch (err) {
+      console.error("Toggle failed:", err.message)
+    }
+  }
+
+  const editTask = async (id, values) => {
+    try {
+      const { data } = await axios.put(
+        `http://localhost:5000/task/${id}`,
+        values
+      )
+
+      settask((prev) =>
+        prev.map((t) =>
+          t._id === id ? data.updatedTask : t
+        )
+      )
+    } catch (err) {
+      console.error("Update failed:", err.message)
+    }
+  }
+  const remove = async (id) => {
+    try {
+      await axios.delete(
+        `http://localhost:5000/task/${id}`
+      )
+
+      settask((prev) =>
+        prev.filter((t) => t._id !== id)
+      )
+    } catch (err) {
+      console.error("Delete failed:", err.message)
+    }
+  }
 
   return (
     <div className="min-h-screen bg-black text-white p-6">

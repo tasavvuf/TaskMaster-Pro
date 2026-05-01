@@ -10,7 +10,7 @@ function TaskItem({ val, toggleTask, remove ,toggleedit }) {
           onClick={()=>
           
             {
-             (confirm("do you really wany to delete")) ? remove(val.id) : alert("you cancel the delete")
+             (confirm("do you really wany to delete")) ? remove(val._id) : alert("you cancel the delete")
  }
         }
         >
@@ -26,7 +26,7 @@ function TaskItem({ val, toggleTask, remove ,toggleedit }) {
         <input
           type="checkbox"
           checked={val.isDone}
-          onChange={() => toggleTask(val.id)}
+          onChange={() => toggleTask(val._id)}
           className="w-5 h-5 accent-amber-400 cursor-pointer transition-all duration-200 "
         />
       </div>
