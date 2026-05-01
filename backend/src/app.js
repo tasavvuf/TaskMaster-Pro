@@ -58,7 +58,7 @@ app.put("/task/:id", async (req, res) => {
     const { id } = req.params
 
     const updatedTask = await taskModel.findByIdAndUpdate(id, req.body, {
-      new: true,
+     returnDocument: 'after',
       runValidators: true
     })
 
