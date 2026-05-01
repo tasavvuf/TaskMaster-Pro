@@ -1,44 +1,64 @@
 # TaskMaster-Pro
 
-A professional task management app built with React and Tailwind CSS as a learning project.
+TaskMaster-Pro is a full-stack task manager built with React, Vite, Express, MongoDB, and Tailwind CSS.
 
-## Learning Journey
+## What It Does
 
-This project was created to practice and master React fundamentals. As a learner, I've implemented the following features:
-
-### Features Completed:
-- **Add Tasks**: Form with title, description, priority (Low/Medium/High), category (Work/Personal/Urgent)
-- **Display Tasks**: Color-coded priority indicators (red=high, yellow=medium, green=low)
-- **Form Validation**: Title is required
-- **Two-way Binding**: Using useState for form fields
-- **Props**: Passing functions from parent to child components
-
-### Concepts Practiced:
-- useState for managing state
-- Controlled components (input, textarea, select with value + onChange)
-- Component communication via props
-- Array mapping for rendering lists
-- Tailwind CSS styling
-
-### Features Coming Next:
-- Delete & Complete tasks
-- Filter by status/category/priority
-- Edit tasks functionality
-- LocalStorage persistence
-- Stats dashboard
-- Search/filter bar
+- Create tasks with title, description, priority, category, and completion state
+- Read all tasks from the MongoDB-backed API
+- Update tasks inline through the edit form
+- Toggle completion status
+- Delete tasks
+- Filter by status, priority, and category
+- Search tasks by title
+- View task stats and completion progress
 
 ## Tech Stack
-- React + Vite
-- Tailwind CSS
-- JavaScript
+
+- Frontend: React, Vite, Axios, Tailwind CSS
+- Backend: Node.js, Express, Mongoose, CORS, dotenv
+- Database: MongoDB
+
+## Project Structure
+
+- `src/` - React frontend
+- `backend/` - Express API and MongoDB models
 
 ## Getting Started
 
+1. Install dependencies:
+
 ```bash
 npm install
+```
+
+2. Add your MongoDB connection string to `.env`:
+
+```env
+MONGO_URI=your_mongodb_connection_string
+```
+
+3. Start the backend:
+
+```bash
+npm run server
+```
+
+4. Start the frontend:
+
+```bash
 npm run dev
 ```
 
-## GitHub
-https://github.com/itz-dev-tasavvuf/TaskMaster-Pro
+## API Endpoints
+
+- `GET /tasks` - fetch all tasks
+- `POST /task` - create a task
+- `PUT /task/:id` - update a task
+- `DELETE /task/:id` - delete a task
+
+## Notes
+
+- The frontend talks directly to the local backend at `http://localhost:5000`
+- Task data is persisted in MongoDB, so refreshes no longer clear the list
+
