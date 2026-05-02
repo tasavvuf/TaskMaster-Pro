@@ -39,18 +39,14 @@ function App() {
 
   const altertask = async (id) => {
     try {
-      const currentTask = task.find((t) => t._id === id)
-
-      if (!currentTask) return
 
       const { data } = await axios.put(
-        `http://localhost:5000/task/${id}`,
-        { isDone: !currentTask.isDone }
+        `http://localhost:5000/task/${id}/toggle`
       )
 
       settask((prev) =>
         prev.map((t) =>
-          t._id === id ? data.updatedTask : t
+          t._id === id ? data.task : t
         )
       )
     } catch (err) {

@@ -71,4 +71,16 @@ app.put("/task/:id", async (req, res) => {
     res.status(400).json({ message: "Error updating task", error: error.message })
   }
 })
+app.put("/task/:id/toggle",async(req,res)=>{
+  try {
+    const {id} = req.params
+  const task = await taskModel.findById(id)
+  if(!task) return res.status(404).send("cant find the task with this id")
+  task.isDone = !task.isDone
+  await task.save()
+  res.json({task})
+  } catch (error) {
+  res.status(400).json({ message: "Error updating task", error: error.message })  }
+  
+})
 export default app
